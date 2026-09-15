@@ -1,7 +1,8 @@
 from random import choice
 
 GAME_CHOICES = ("r", "p", "s")
-VISUALS = {"r":"🧱", "p":"📄", "s":"✂"}
+EMOJIS = ("🧱", "📄", "✂")
+VISUALS = dict(zip(GAME_CHOICES, EMOJIS))
 
 WINNING_CASES = ("rs", "pr", "sp")
 
@@ -16,7 +17,7 @@ def main():
         if user_choice in GAME_CHOICES:
             result = referee(user_choice, com_choice)
             # print results
-            print(f"You chose '{VISUALS[user_choice]}'\nComputer chose '{VISUALS[com_choice]}'\n{result}")
+            show_result(user_choice, com_choice, result)
             # Asking the user about their preference
             answer = input("Continue? (y/n): ").strip().lower()
             if answer == "n":
@@ -37,5 +38,11 @@ def referee(user_choice, com_choice):
     else:
         result = "You lose!"
     return result
+
+def show_result(user_choice, com_choice, result):
+    print(f"""
+You chose '{VISUALS[user_choice]}'
+Computer chose '{VISUALS[com_choice]}'
+{result}""")
 
 main()
